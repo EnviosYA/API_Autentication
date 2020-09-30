@@ -1,0 +1,199 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.AccessData\\PS.Template.AccessData.csproj": {}
+  },
+  "projects": {
+    "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.AccessData\\PS.Template.AccessData.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.AccessData\\PS.Template.AccessData.csproj",
+        "projectName": "PS.Template.AccessData",
+        "projectPath": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.AccessData\\PS.Template.AccessData.csproj",
+        "packagesPath": "C:\\Users\\LeanLima\\.nuget\\packages\\",
+        "outputPath": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.AccessData\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\LeanLima\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Application\\PS.Template.Application.csproj": {
+                "projectPath": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Application\\PS.Template.Application.csproj"
+              },
+              "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Domain\\PS.Template.Domain.csproj": {
+                "projectPath": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Domain\\PS.Template.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "SqlKata": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "SqlKata.Execution": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Application\\PS.Template.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Application\\PS.Template.Application.csproj",
+        "projectName": "PS.Template.Application",
+        "projectPath": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Application\\PS.Template.Application.csproj",
+        "packagesPath": "C:\\Users\\LeanLima\\.nuget\\packages\\",
+        "outputPath": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\LeanLima\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Domain\\PS.Template.Domain.csproj": {
+                "projectPath": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Domain\\PS.Template.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Domain\\PS.Template.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Domain\\PS.Template.Domain.csproj",
+        "projectName": "PS.Autenticacion.Domain",
+        "projectPath": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Domain\\PS.Template.Domain.csproj",
+        "packagesPath": "C:\\Users\\LeanLima\\.nuget\\packages\\",
+        "outputPath": "D:\\Archivos\\Documentos\\Trabajo Proyecto Software\\API_AUTENTICACION\\API_Autentication\\API_TEMPLATE\\API_TEMPLATE-master\\PS.Template.API\\PS.Template.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\LeanLima\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNet.Identity.EntityFramework": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

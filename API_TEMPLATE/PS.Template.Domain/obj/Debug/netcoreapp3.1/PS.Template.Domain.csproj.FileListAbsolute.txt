@@ -1,0 +1,26 @@
+D:\Archivos\Documentos\PruebasPS\PS.Template.API\PS.Template.Domain\bin\Debug\netcoreapp3.1\PS.Template.Domain.deps.json
+D:\Archivos\Documentos\PruebasPS\PS.Template.API\PS.Template.Domain\bin\Debug\netcoreapp3.1\PS.Template.Domain.dll
+D:\Archivos\Documentos\PruebasPS\PS.Template.API\PS.Template.Domain\bin\Debug\netcoreapp3.1\PS.Template.Domain.pdb
+D:\Archivos\Documentos\PruebasPS\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.csprojAssemblyReference.cache
+D:\Archivos\Documentos\PruebasPS\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.AssemblyInfoInputs.cache
+D:\Archivos\Documentos\PruebasPS\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.AssemblyInfo.cs
+D:\Archivos\Documentos\PruebasPS\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.csproj.CoreCompileInputs.cache
+D:\Archivos\Documentos\PruebasPS\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.dll
+D:\Archivos\Documentos\PruebasPS\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.pdb
+C:\Users\Ignacio\Desktop\Template del proyecto\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\bin\Debug\netcoreapp3.1\PS.Template.Domain.deps.json
+C:\Users\Ignacio\Desktop\Template del proyecto\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\bin\Debug\netcoreapp3.1\PS.Template.Domain.dll
+C:\Users\Ignacio\Desktop\Template del proyecto\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\bin\Debug\netcoreapp3.1\PS.Template.Domain.pdb
+C:\Users\Ignacio\Desktop\Template del proyecto\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.csprojAssemblyReference.cache
+C:\Users\Ignacio\Desktop\Template del proyecto\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.AssemblyInfoInputs.cache
+C:\Users\Ignacio\Desktop\Template del proyecto\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.AssemblyInfo.cs
+C:\Users\Ignacio\Desktop\Template del proyecto\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.dll
+C:\Users\Ignacio\Desktop\Template del proyecto\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.pdb
+D:\Archivos\Documentos\Trabajo Proyecto Software\API_AUTENTICACION\API_Autentication\API_TEMPLATE\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.csprojAssemblyReference.cache
+D:\Archivos\Documentos\Trabajo Proyecto Software\API_AUTENTICACION\API_Autentication\API_TEMPLATE\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.AssemblyInfoInputs.cache
+D:\Archivos\Documentos\Trabajo Proyecto Software\API_AUTENTICACION\API_Autentication\API_TEMPLATE\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.AssemblyInfo.cs
+D:\Archivos\Documentos\Trabajo Proyecto Software\API_AUTENTICACION\API_Autentication\API_TEMPLATE\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Template.Domain.csproj.CoreCompileInputs.cache
+D:\Archivos\Documentos\Trabajo Proyecto Software\API_AUTENTICACION\API_Autentication\API_TEMPLATE\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\bin\Debug\netcoreapp3.1\PS.Autenticacion.Domain.deps.json
+D:\Archivos\Documentos\Trabajo Proyecto Software\API_AUTENTICACION\API_Autentication\API_TEMPLATE\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\bin\Debug\netcoreapp3.1\PS.Autenticacion.Domain.dll
+D:\Archivos\Documentos\Trabajo Proyecto Software\API_AUTENTICACION\API_Autentication\API_TEMPLATE\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\bin\Debug\netcoreapp3.1\PS.Autenticacion.Domain.pdb
+D:\Archivos\Documentos\Trabajo Proyecto Software\API_AUTENTICACION\API_Autentication\API_TEMPLATE\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Autenticacion.Domain.dll
+D:\Archivos\Documentos\Trabajo Proyecto Software\API_AUTENTICACION\API_Autentication\API_TEMPLATE\API_TEMPLATE-master\PS.Template.API\PS.Template.Domain\obj\Debug\netcoreapp3.1\PS.Autenticacion.Domain.pdb
