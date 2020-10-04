@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PS.Template.AccessData.Context;
 using PS.Template.Domain.Commands;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ namespace PS.Template.AccessData.Commands
 {
     public class GenericsRepository<E> : IGenericsRepository<E> where E : class
     {
-        private readonly BaseDbContext _context;
-        public GenericsRepository(BaseDbContext dbContext)
+        private readonly DbAutenticacionContext _context;
+        public GenericsRepository(DbAutenticacionContext dbContext)
         {
             _context = dbContext;
         }
@@ -30,7 +31,6 @@ namespace PS.Template.AccessData.Commands
             _context.Set<E>().Remove(entity);
             _context.SaveChanges();
         }
-
         public virtual void Delete(int id)
         {
             E entity = FindById(id);
@@ -41,7 +41,6 @@ namespace PS.Template.AccessData.Commands
             _context.Set<E>().RemoveRange(entity);
             _context.SaveChanges();
         }
-
         public virtual void Edit(E entity)
         {
             _context.Set<E>().Attach(entity);
@@ -53,12 +52,10 @@ namespace PS.Template.AccessData.Commands
             _context.Set<E>().UpdateRange(entity);
             _context.SaveChanges();
         }
-
         public virtual E FindById(int id)
         {
             return _context.Set<E>().Find(id);
         }
-
         public virtual void Save()
         {
             _context.SaveChanges();

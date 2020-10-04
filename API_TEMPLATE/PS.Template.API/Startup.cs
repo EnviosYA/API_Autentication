@@ -1,4 +1,4 @@
-using System;
+    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +19,11 @@ using PS.Template.AccessData.Commands;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using PS.Template.AccessData.Context;
+using PS.Template.Domain.Interfaces.Repositories;
+using PS.Template.AccessData.Repositories;
+using PS.Template.Domain.Interfaces.Service;
+using PS.Template.Domain.Entities;
 
 namespace PS.Template.API
 {
@@ -29,19 +34,6 @@ namespace PS.Template.API
             Configuration = configuration;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -51,14 +43,18 @@ namespace PS.Template.API
             services.AddMvc();
 
             var connectionString = Configuration.GetSection("ConnectionString").Value;
+            services.AddDbContext<DbAutenticacionContext>(opcion => opcion.UseSqlServer(connectionString));
 
+            services.AddTransient<ICuentaRepository, CuentaRepository>();
+            services.AddTransient<ICuentaService, CuentaService>();
 
-            services.AddDbContext<BaseDbContext>(opcion => opcion.UseSqlServer(connectionString));
+            services.AddTransient<ITipoCuentaRepository, TipoCuentaRepository>();
+            services.AddTransient<ITipoCuentaService, TipoCuentaService>();
 
-            services.AddTransient<IAlumnoRepository, AlumnoRepository>();
-            services.AddTransient<IAlumnoService, AlumnoService>();
+            services.AddTransient<IEstadoRepository, EstadoRepository>();
+            services.AddTransient<IEstadoService, EstadoService>();
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(c => 
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
@@ -67,9 +63,6 @@ namespace PS.Template.API
                     Description = "Test services"
                 });
             });
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

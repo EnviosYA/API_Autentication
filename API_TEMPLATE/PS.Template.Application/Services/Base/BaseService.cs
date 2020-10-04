@@ -14,17 +14,14 @@ namespace PS.Template.Application.Services.Base
         {
             Repository = repository;
         }
-
         public virtual void Add(E entity)
         {
             Repository.Add(entity);
         }
-
         public virtual void Delete(E entity)
         {
             Repository.Delete(entity);
         }
-
         public virtual void Delete(int id)
         {
             Repository.Delete(id);
@@ -36,6 +33,26 @@ namespace PS.Template.Application.Services.Base
         public virtual void Edit(E entity)
         {
             Repository.Edit(entity);
+        }
+        public virtual void EditRange(IEnumerable<E> entity)
+        {
+            Repository.EditRange(entity);
+        }
+        public virtual void Save()
+        {
+            Repository.Save();
+        }
+        public virtual void AddRange(IEnumerable<E> entity)
+        {
+            Repository.AddRange(entity);
+        }
+        public virtual void DeleteRange(IEnumerable<E> entity)
+        {
+            Repository.DeleteRange(entity);
+        }
+        public virtual E FindById(int id)
+        {
+            return Repository.FindById(id);
         }
     }
 }
