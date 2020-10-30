@@ -1,29 +1,16 @@
-    using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using PS.Template.AccessData;
 using Microsoft.EntityFrameworkCore;
-using PS.Template.Domain.Commands;
-using PS.Template.Domain.Service;
 using PS.Template.Application.Services;
-using PS.Template.AccessData.Commands;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using PS.Template.AccessData.Context;
 using PS.Template.Domain.Interfaces.Repositories;
 using PS.Template.AccessData.Repositories;
 using PS.Template.Domain.Interfaces.Service;
-using PS.Template.Domain.Entities;
+using PS.Template.JWSToken;
 
 namespace PS.Template.API
 {
@@ -53,7 +40,7 @@ namespace PS.Template.API
 
             services.AddTransient<IEstadoRepository, EstadoRepository>();
             services.AddTransient<IEstadoService, EstadoService>();
-
+            
             services.AddSwaggerGen(c => 
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -63,6 +50,13 @@ namespace PS.Template.API
                     Description = "Test services"
                 });
             });
+            //services.AddCors(c => c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+            // CONFIGRACION DEL JWSTOKEN
+            services.AddJWTAuthentication(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,7 +80,9 @@ namespace PS.Template.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            // Genera los Cors
+            //app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

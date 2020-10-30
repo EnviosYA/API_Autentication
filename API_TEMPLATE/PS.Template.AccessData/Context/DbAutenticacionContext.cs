@@ -22,7 +22,7 @@ namespace PS.Template.AccessData.Context
         public virtual DbSet<TipoCuenta> TipoCuenta { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+            {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Data Source= DESKTOP-Q70Q68R\\SQLEXPRESS; Initial Catalog= DbAutenticacion; user=Lean; password=123123; Integrated Security= true;");

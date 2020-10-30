@@ -1,8 +1,10 @@
-﻿using PS.Template.Application.Services.Base;
+﻿using PS.Template.Application.RequestAPis;
+using PS.Template.Application.Services.Base;
 using PS.Template.Domain.DTO;
 using PS.Template.Domain.Entities;
 using PS.Template.Domain.Interfaces.Repositories;
 using PS.Template.Domain.Interfaces.Service;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,7 +28,6 @@ namespace PS.Template.Application.Services
         {
             try
             {
-
                 Cuenta cuenta = new Cuenta()
                 {
                     Mail = account.Mail,
@@ -44,6 +45,13 @@ namespace PS.Template.Application.Services
             {
                 return false;
             }
+        }
+
+        public void GetDataApi()
+        {
+            string uri = GenerateRequest.GetUri(1);
+            RestRequest request = new RestRequest(Method.GET);
+            GenerateRequest.ConsultarApiRest(uri, request);
         }
     }
 }

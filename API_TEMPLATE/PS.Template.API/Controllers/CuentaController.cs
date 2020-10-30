@@ -13,6 +13,7 @@ using PS.Template.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using PS.Template.Domain.Interfaces.Service;
 using PS.Template.Domain.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PS.Template.API.Controllers
 {
@@ -27,31 +28,23 @@ namespace PS.Template.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromBody]UserInfo userInfo)
+        public IActionResult Get([FromQuery] UserInfo userInfo)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    var details = new ValidationProblemDetails(ModelState);
-            //    return new ObjectResult(details)
-            //    {
-            //        ContentTypes = { "application/problem+json" },
-            //        StatusCode = 400,
-            //    };
-            //}
             DatosCuentasDTO cuentaDTO = _service.FindDataAccount(userInfo);
 
             if (cuentaDTO != null)
-                return Ok(GenerateToken(cuentaDTO));
+                return Ok(EjemploWeb(cuentaDTO));
+            //return Ok(GenerateToken(cuentaDTO));
             else
                 return Unauthorized();
         }
-
+        [Authorize()]
         [HttpPost]
         public IActionResult Post(CuentaDTO account)
         {
-            if (false)//_service.AltaCuenta(account))
+            if (_service.AltaCuenta(account))
             {
-                return Ok(204);
+                return Ok(201);
             }
             else
             {
@@ -69,9 +62,8 @@ namespace PS.Template.API.Controllers
                     StatusCode = 501,
                 };
             }
-            
         }
-        private string GenerateToken(DatosCuentasDTO Data)
+        private string GenerateToken(DatosCuentasDTO data)
         {
             var header = new JwtHeader(
                 new SigningCredentials(
@@ -83,18 +75,38 @@ namespace PS.Template.API.Controllers
 
             var claims = new Claim[]
             {
-                new Claim(JwtRegisteredClaimNames.UniqueName, Data.IdUsuario.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, Data.Mail),
-                new Claim(JwtRegisteredClaimNames.Actort , Data.DescTipCuenta),
-                new Claim(JwtRegisteredClaimNames.Prn , Data.DescEstado)
+                new Claim(JwtRegisteredClaimNames.UniqueName, data.IdUsuario.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, data.Mail),
+                new Claim(JwtRegisteredClaimNames.Actort , data.DescTipCuenta),
+                new Claim(JwtRegisteredClaimNames.Prn , data.DescEstado)
             };
             var payload = new JwtPayload(
-                issuer : "enviosya.com.ar",
-                audience : "enviosya.com.ar",
-                claims : claims,
-                notBefore : DateTime.Now,
-                expires : DateTime.Now.AddMinutes(20)
+                issuer: "enviosya.com.ar",
+                audience: "enviosya.com.ar",
+                claims: claims,
+                notBefore: DateTime.Now,
+                expires: DateTime.Now.AddMinutes(20)
                 );
+
+            var token = new JwtSecurityToken(header, payload);
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private string EjemploWeb(DatosCuentasDTO data )
+        {
+            var header = new JwtHeader(
+            new SigningCredentials(
+                new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes("your-secret-key-here")
+                ),
+                SecurityAlgorithms.HmacSha256)
+        );
+
+            var claims = new Claim[]
+            {
+            new Claim(JwtRegisteredClaimNames.UniqueName, data.Mail),
+            };
+            var payload = new JwtPayload(claims);
 
             var token = new JwtSecurityToken(header, payload);
             return new JwtSecurityTokenHandler().WriteToken(token);

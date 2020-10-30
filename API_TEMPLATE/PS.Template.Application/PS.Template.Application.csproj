@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PS.Template.Domain\PS.Template.Domain.csproj" />
   </ItemGroup>
 
