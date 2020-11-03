@@ -11,6 +11,10 @@ using PS.Template.Domain.Interfaces.Repositories;
 using PS.Template.AccessData.Repositories;
 using PS.Template.Domain.Interfaces.Service;
 using PS.Template.JWSToken;
+using PS.Template.Domain.Entities;
+using System.Configuration;
+using PS.Template.Application.RequestAPis;
+using PS.Template.Domain.Interfaces.RequestApis;
 
 namespace PS.Template.API
 {
@@ -20,7 +24,6 @@ namespace PS.Template.API
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -40,7 +43,9 @@ namespace PS.Template.API
 
             services.AddTransient<IEstadoRepository, EstadoRepository>();
             services.AddTransient<IEstadoService, EstadoService>();
-            
+
+            services.AddTransient<IGenerateRequest, GenerateRequest>();
+
             services.AddSwaggerGen(c => 
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -50,20 +55,20 @@ namespace PS.Template.API
                     Description = "Test services"
                 });
             });
-            //services.AddCors(c => c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+
+            // Genera los Cors
             services.AddCors(c =>
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
-            // CONFIGRACION DEL JWSTOKEN
+
+            // CONFIGURACION DEL JWSTOKEN
             services.AddJWTAuthentication(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -80,8 +85,7 @@ namespace PS.Template.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            // Genera los Cors
-            //app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -1,29 +1,30 @@
-﻿using PS.Template.Application.RequestAPis;
-using PS.Template.Application.Services.Base;
+﻿using PS.Template.Application.Services.Base;
 using PS.Template.Domain.DTO;
 using PS.Template.Domain.Entities;
 using PS.Template.Domain.Interfaces.Repositories;
+using PS.Template.Domain.Interfaces.RequestApis;
 using PS.Template.Domain.Interfaces.Service;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PS.Template.Application.Services
 {
     public class CuentaService : BaseService<Cuenta>, ICuentaService
     {
         private readonly ICuentaRepository _repository;
-        public CuentaService(ICuentaRepository repository) : base(repository)
+        private readonly IGenerateRequest _request;
+
+        public CuentaService(ICuentaRepository repository, IGenerateRequest generate) : base(repository)
         {
             _repository = repository;
+            _request = generate;
         }
-
         public virtual DatosCuentasDTO FindDataAccount(UserInfo userInfo)
         {
+            GetDataApi();
             return _repository.FindDataAccount(userInfo);
         }
-
         public virtual bool AltaCuenta(CuentaDTO account)
         {
             try
@@ -49,9 +50,10 @@ namespace PS.Template.Application.Services
 
         public void GetDataApi()
         {
-            string uri = GenerateRequest.GetUri(1);
+            string uri = _request.GetUri(2);
             RestRequest request = new RestRequest(Method.GET);
-            GenerateRequest.ConsultarApiRest(uri, request);
+            request.AddQueryParameter("id", "1");
+            IEnumerable<ResponseGetAllUsuarios> user= _request.ConsultarApiRest(uri, request);
         }
     }
 }

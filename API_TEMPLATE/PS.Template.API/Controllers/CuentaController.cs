@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using PS.Template.Domain.Entities;
-using Microsoft.Extensions.Configuration;
 using PS.Template.Domain.Interfaces.Service;
 using PS.Template.Domain.DTO;
 using Microsoft.AspNetCore.Authorization;
@@ -91,7 +85,6 @@ namespace PS.Template.API.Controllers
             var token = new JwtSecurityToken(header, payload);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
         private string EjemploWeb(DatosCuentasDTO data )
         {
             var header = new JwtHeader(

@@ -44,7 +44,7 @@ namespace PS.Template.JWSToken
 
         public static IServiceCollection AddJWTAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            //Configuratio Authentication
+            //Configuration Authentication
             var key = Encoding.ASCII.GetBytes(configuration.GetSection("Autenticacion:SecretKey").Value);
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
