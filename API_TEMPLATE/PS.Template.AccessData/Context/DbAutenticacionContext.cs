@@ -66,6 +66,16 @@ namespace PS.Template.AccessData.Context
                 entity.Property(e => e.DescEstado)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+                entity.HasData(new Estado
+                {
+                    IdEstado=1,
+                    DescEstado="Alta"
+                });
+                entity.HasData(new Estado
+                {
+                    IdEstado = 2,
+                    DescEstado = "Baja"
+                });
             });
 
             modelBuilder.Entity<TipoCuenta>(entity =>
@@ -76,6 +86,16 @@ namespace PS.Template.AccessData.Context
                 entity.Property(e => e.DescTipCuenta)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+                entity.HasData(new TipoCuenta
+                {
+                    IdTipoCuenta = 1,
+                    DescTipCuenta = "Usuario"
+                });
+                entity.HasData(new TipoCuenta
+                {
+                    IdTipoCuenta = 2,
+                    DescTipCuenta = "Admin"
+                });
             });
 
             OnModelCreatingPartial(modelBuilder);
