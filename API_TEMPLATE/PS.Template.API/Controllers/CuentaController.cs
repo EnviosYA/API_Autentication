@@ -8,6 +8,9 @@ using PS.Template.Domain.Entities;
 using PS.Template.Domain.Interfaces.Service;
 using PS.Template.Domain.DTO;
 using Microsoft.AspNetCore.Authorization;
+using TP2.Domain.DTO;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace PS.Template.API.Controllers
 {
@@ -16,9 +19,11 @@ namespace PS.Template.API.Controllers
     public class CuentaController : ControllerBase
     {
         private readonly ICuentaService _service;
-        public CuentaController(ICuentaService service)
+        private readonly IConfiguration _configuration;
+        public CuentaController(ICuentaService service, IConfiguration configuration)
         {
             _service = service;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -36,9 +41,19 @@ namespace PS.Template.API.Controllers
         [HttpPost]
         public IActionResult Post(CuentaDTO account)
         {
-            if (_service.AltaCuenta(account))
+            IEnumerable<Claim> cp = this.User.Claims;
+             //claims = Claim.
+            var cuenta = _service.AltaCuenta(account);
+            if (cuenta != null)
             {
-                return Ok(201);
+
+                return StatusCode(201, new ResponsePutOK()
+                {
+                    Id = cuenta.IdCuenta.ToString(),
+                    StatusCode = "201",
+                    Type = "Cuenta"
+                }
+                ); ;
             }
             else
             {
@@ -50,11 +65,11 @@ namespace PS.Template.API.Controllers
                     Instance = Url.Action("Put", "account", new { id = account.Mail }),
                     Status = 501
                 };
-                return new ObjectResult(details)
-                {
-                    ContentTypes = { "application/problem+json" },
-                    StatusCode = 501,
-                };
+                return new ObjectResult(details);
+                //{
+                //    ContentTypes = { "application/problem+json" },
+                //    StatusCode = 501,
+                //};
             }
         }
         private string GenerateToken(DatosCuentasDTO data)
@@ -85,19 +100,25 @@ namespace PS.Template.API.Controllers
             var token = new JwtSecurityToken(header, payload);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        private string EjemploWeb(DatosCuentasDTO data )
+        private string EjemploWeb(DatosCuentasDTO data)
         {
             var header = new JwtHeader(
             new SigningCredentials(
                 new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes("your-secret-key-here")
+                    Encoding.UTF8.GetBytes(_configuration.GetSection("Autenticacion:SecretKey").Value)
                 ),
                 SecurityAlgorithms.HmacSha256)
-        );
+         );
 
             var claims = new Claim[]
             {
-            new Claim(JwtRegisteredClaimNames.UniqueName, data.Mail),
+
+                new Claim("IdUser", data.IdUsuario.ToString()),
+                new Claim("Email", data.Mail),
+                new Claim("account type" , data.DescTipCuenta),
+                new Claim("State" , data.DescEstado),
+                new Claim("Name",data.NameUser),
+                new Claim("LastName",data.LastNameUser)
             };
             var payload = new JwtPayload(claims);
 

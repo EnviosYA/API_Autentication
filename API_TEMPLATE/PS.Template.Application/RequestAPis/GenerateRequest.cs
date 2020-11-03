@@ -6,16 +6,21 @@ using System.Net;
 using PS.Template.Domain.Interfaces.RequestApis;
 using PS.Template.Domain.DTO;
 using Newtonsoft.Json;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace PS.Template.Application.RequestAPis
 {
     public class GenerateRequest : IGenerateRequest
     {
-        private static IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public GenerateRequest(IConfiguration configuration)
+        public GenerateRequest(IConfiguration configuration, IHttpContextAccessor contextAccessor)
         {
             _configuration = configuration;
+            _contextAccessor = contextAccessor;
         }
 
         public string GetUri(int option)
@@ -35,11 +40,11 @@ namespace PS.Template.Application.RequestAPis
             }
             return uri;
         }
-        public IEnumerable<ResponseGetAllUsuarios> ConsultarApiRest(string uri, RestRequest request)
+        public IEnumerable<T> ConsultarApiRest<T>(string uri, RestRequest request)
         {
             IRestClient client;
             IRestResponse queryResult;
-            IEnumerable<ResponseGetAllUsuarios> hash = null;
+            IEnumerable<T> hash = null;
             var headers = new Dictionary<string, string>
             {
                 { "Content-Type", "application/json" },
@@ -59,14 +64,21 @@ namespace PS.Template.Application.RequestAPis
                 
                 if (queryResult.StatusCode == HttpStatusCode.OK)
                 {
-                    hash = JsonConvert.DeserializeObject<IList<ResponseGetAllUsuarios>>(queryResult.Content);
+                    hash = JsonConvert.DeserializeObject<IList<T>>(queryResult.Content);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Errrrooooor: " + ex.Message);
+                ex.ToString();
             }
             return hash;
         }
-    }
+
+    //    public void LeerClaims()
+    //    {
+    //        IEnumerable<Claim> cp = _contextAccessor.HttpContext.User.Claims;
+    //        var a = _contextAccessor.HttpContext.Request.Headers.GetCommaSeparatedValues("Authorization"); //("Authorization");
+    //        //var a = AuthenticationManager.CredentialPolicy; //_contextAccessor.HttpContext.Authentication
+    //    }
+    //}
 }

@@ -7,6 +7,6 @@ namespace PS.Template.Domain.Interfaces.Service
     public interface ICuentaService : IBaseService<Cuenta>
     {
         DatosCuentasDTO FindDataAccount(UserInfo userInfo);
-        bool AltaCuenta(CuentaDTO account);
+        Cuenta AltaCuenta(CuentaDTO account);
     }
 }

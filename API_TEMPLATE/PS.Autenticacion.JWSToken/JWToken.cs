@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 
 namespace PS.Template.JWSToken
@@ -53,7 +55,7 @@ namespace PS.Template.JWSToken
                         jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
                         {
                             IssuerSigningKey = new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes("your-secret-key-here")
+                                Encoding.UTF8.GetBytes("Lima-Villajuan-Djirikian-Blasi-Gargatagli")
                                 ),
 
                             ValidateIssuer = false,

@@ -64,6 +64,9 @@ namespace PS.Template.API
 
             // CONFIGURACION DEL JWSTOKEN
             services.AddJWTAuthentication(Configuration);
+
+            //
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

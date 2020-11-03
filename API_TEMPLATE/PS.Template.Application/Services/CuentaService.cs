@@ -7,6 +7,7 @@ using PS.Template.Domain.Interfaces.Service;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace PS.Template.Application.Services
 {
@@ -22,11 +23,23 @@ namespace PS.Template.Application.Services
         }
         public virtual DatosCuentasDTO FindDataAccount(UserInfo userInfo)
         {
-            GetDataApi();
-            return _repository.FindDataAccount(userInfo);
+            
+            DatosCuentasDTO cuentaDTO =  _repository.FindDataAccount(userInfo);
+            if (cuentaDTO != null)
+            {
+                IEnumerable<ResponseGetAllUsuarios> user = GetDataApi(cuentaDTO.IdUsuario);
+                foreach (var item in user)
+                {
+                    cuentaDTO.NameUser = item.Nombre;
+                    cuentaDTO.LastNameUser = item.Apellido;
+                }
+            }
+            
+            return cuentaDTO;
         }
-        public virtual bool AltaCuenta(CuentaDTO account)
+        public virtual Cuenta AltaCuenta(CuentaDTO account)
         {
+            _request.LeerClaims();
             try
             {
                 Cuenta cuenta = new Cuenta()
@@ -40,20 +53,22 @@ namespace PS.Template.Application.Services
                 };
                 _repository.Add(cuenta);
 
-                return true;
+                return cuenta;
             }
             catch
             {
-                return false;
+                return null;
             }
         }
 
-        public void GetDataApi()
+        public IEnumerable<ResponseGetAllUsuarios> GetDataApi(int usuario)
         {
             string uri = _request.GetUri(2);
             RestRequest request = new RestRequest(Method.GET);
-            request.AddQueryParameter("id", "1");
-            IEnumerable<ResponseGetAllUsuarios> user= _request.ConsultarApiRest(uri, request);
+            request.AddQueryParameter("id", usuario.ToString());
+            IEnumerable<ResponseGetAllUsuarios> user= _request.ConsultarApiRest<ResponseGetAllUsuarios>(uri, request);
+
+            return user;
         }
     }
 }
