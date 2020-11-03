@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>PS.Autenticacion.EnvioYa</PackageId>
+    <Authors>PS.Autenticacion</Authors>
+    <Product>PS.Autenticacion</Product>
+    <Description>Autenticacion del JWT usado para la materia de Proyecto de Software en la universidad Nacional Arturo Jauretche</Description>
+    <PackageLicenseExpression></PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

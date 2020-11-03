@@ -37,7 +37,6 @@ namespace PS.Template.API.Controllers
             else
                 return Unauthorized();
         }
-        [Authorize()]
         [HttpPost]
         public IActionResult Post(CuentaDTO account)
         {
@@ -50,7 +49,6 @@ namespace PS.Template.API.Controllers
                 return StatusCode(201, new ResponsePutOK()
                 {
                     Id = cuenta.IdCuenta.ToString(),
-                    StatusCode = "201",
                     Type = "Cuenta"
                 }
                 ); ;
@@ -63,13 +61,8 @@ namespace PS.Template.API.Controllers
                     Title = "Error al generar Cliente",
                     Detail = "No se ha podido realizar el alta de la cuenta",
                     Instance = Url.Action("Put", "account", new { id = account.Mail }),
-                    Status = 501
                 };
-                return new ObjectResult(details);
-                //{
-                //    ContentTypes = { "application/problem+json" },
-                //    StatusCode = 501,
-                //};
+                return StatusCode(501, details);
             }
         }
         private string GenerateToken(DatosCuentasDTO data)

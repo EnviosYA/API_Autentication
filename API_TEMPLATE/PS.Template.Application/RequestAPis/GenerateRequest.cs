@@ -61,7 +61,7 @@ namespace PS.Template.Application.RequestAPis
                 request.AddHeaders(headers);
                 request.RequestFormat = DataFormat.Json;
                 queryResult = client.Execute(request);
-                
+
                 if (queryResult.StatusCode == HttpStatusCode.OK)
                 {
                     hash = JsonConvert.DeserializeObject<IList<T>>(queryResult.Content);
@@ -74,11 +74,10 @@ namespace PS.Template.Application.RequestAPis
             return hash;
         }
 
-    //    public void LeerClaims()
-    //    {
-    //        IEnumerable<Claim> cp = _contextAccessor.HttpContext.User.Claims;
-    //        var a = _contextAccessor.HttpContext.Request.Headers.GetCommaSeparatedValues("Authorization"); //("Authorization");
-    //        //var a = AuthenticationManager.CredentialPolicy; //_contextAccessor.HttpContext.Authentication
-    //    }
-    //}
+        public void LeerClaims()
+        {
+            IEnumerable<Claim> cp = _contextAccessor.HttpContext.User.Claims;
+            var a = _contextAccessor.HttpContext.Request.Headers.GetCommaSeparatedValues("Authorization"); 
+        }
+    }
 }
