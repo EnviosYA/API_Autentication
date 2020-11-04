@@ -39,7 +39,6 @@ namespace PS.Template.Application.Services
         }
         public virtual Cuenta AltaCuenta(CuentaDTO account)
         {
-            _request.LeerClaims();
             try
             {
                 Cuenta cuenta = new Cuenta()

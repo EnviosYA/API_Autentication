@@ -77,7 +77,7 @@ namespace PS.Template.Application.RequestAPis
         public void LeerClaims()
         {
             IEnumerable<Claim> cp = _contextAccessor.HttpContext.User.Claims;
-            var a = _contextAccessor.HttpContext.Request.Headers.GetCommaSeparatedValues("Authorization"); 
+            var a = _contextAccessor.HttpContext.Request.Headers.GetCommaSeparatedValues("Authorization");
         }
     }
 }

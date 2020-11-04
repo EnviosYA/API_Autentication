@@ -32,16 +32,14 @@ namespace PS.Template.API.Controllers
             DatosCuentasDTO cuentaDTO = _service.FindDataAccount(userInfo);
 
             if (cuentaDTO != null)
-                return Ok(EjemploWeb(cuentaDTO));
-            //return Ok(GenerateToken(cuentaDTO));
+                return Ok(GenerateToken(cuentaDTO));
             else
                 return Unauthorized();
         }
+
         [HttpPost]
         public IActionResult Post(CuentaDTO account)
         {
-            IEnumerable<Claim> cp = this.User.Claims;
-             //claims = Claim.
             var cuenta = _service.AltaCuenta(account);
             if (cuenta != null)
             {
@@ -51,7 +49,7 @@ namespace PS.Template.API.Controllers
                     Id = cuenta.IdCuenta.ToString(),
                     Type = "Cuenta"
                 }
-                ); ;
+                );
             }
             else
             {
@@ -68,34 +66,6 @@ namespace PS.Template.API.Controllers
         private string GenerateToken(DatosCuentasDTO data)
         {
             var header = new JwtHeader(
-                new SigningCredentials(
-                    new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes("your-secret-key-here")
-                    ),
-                    SecurityAlgorithms.HmacSha256)
-            );
-
-            var claims = new Claim[]
-            {
-                new Claim(JwtRegisteredClaimNames.UniqueName, data.IdUsuario.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, data.Mail),
-                new Claim(JwtRegisteredClaimNames.Actort , data.DescTipCuenta),
-                new Claim(JwtRegisteredClaimNames.Prn , data.DescEstado)
-            };
-            var payload = new JwtPayload(
-                issuer: "enviosya.com.ar",
-                audience: "enviosya.com.ar",
-                claims: claims,
-                notBefore: DateTime.Now,
-                expires: DateTime.Now.AddMinutes(20)
-                );
-
-            var token = new JwtSecurityToken(header, payload);
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-        private string EjemploWeb(DatosCuentasDTO data)
-        {
-            var header = new JwtHeader(
             new SigningCredentials(
                 new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(_configuration.GetSection("Autenticacion:SecretKey").Value)
@@ -105,7 +75,6 @@ namespace PS.Template.API.Controllers
 
             var claims = new Claim[]
             {
-
                 new Claim("IdUser", data.IdUsuario.ToString()),
                 new Claim("Email", data.Mail),
                 new Claim("account type" , data.DescTipCuenta),
