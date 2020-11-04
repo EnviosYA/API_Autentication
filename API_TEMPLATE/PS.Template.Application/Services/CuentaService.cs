@@ -23,8 +23,10 @@ namespace PS.Template.Application.Services
 
         public virtual DatosCuentasDTO FindDataAccount(UserInfo userInfo)
         {
-            
+            IEnumerable<ResponseGetAllUsuarios> ALGO = GetDataApi(1);
+
             DatosCuentasDTO cuentaDTO =  _repository.FindDataAccount(userInfo);
+
             if (cuentaDTO != null)
             {
                 IEnumerable<ResponseGetAllUsuarios> user = GetDataApi(cuentaDTO.IdUsuario);
@@ -63,7 +65,7 @@ namespace PS.Template.Application.Services
 
         public IEnumerable<ResponseGetAllUsuarios> GetDataApi(int usuario)
         {
-            string uri = _request.GetUri(2);
+            string uri = _request.GetUri(3);
             RestRequest request = new RestRequest(Method.GET);
             request.AddQueryParameter("id", usuario.ToString());
             IEnumerable<ResponseGetAllUsuarios> user= _request.ConsultarApiRest<ResponseGetAllUsuarios>(uri, request);
