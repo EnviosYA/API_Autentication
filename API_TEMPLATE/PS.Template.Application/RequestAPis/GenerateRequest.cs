@@ -4,12 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using PS.Template.Domain.Interfaces.RequestApis;
-using PS.Template.Domain.DTO;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
-
 namespace PS.Template.Application.RequestAPis
 {
     public class GenerateRequest : IGenerateRequest
@@ -34,9 +31,6 @@ namespace PS.Template.Application.RequestAPis
                 case 2:
                     uri = _configuration.GetSection("URL:URI_USUARIO").Value;
                     break;
-                case 3:
-                    uri = null;
-                    break;
             }
             return uri;
         }
@@ -52,17 +46,13 @@ namespace PS.Template.Application.RequestAPis
             };
             try
             {
-                //client = new RestClient(uri)
-                //{
-                //    Authenticator = new JwtAuthenticator("")
-                //};
                 client = new RestClient(uri);
                 client.AddDefaultHeader("Content-Type", "application/json");
                 request.AddHeaders(headers);
                 request.RequestFormat = DataFormat.Json;
                 queryResult = client.Execute(request);
 
-                if (queryResult.StatusCode == HttpStatusCode.OK)
+                if (queryResult.StatusCode == HttpStatusCode.OK || queryResult.StatusCode == HttpStatusCode.Created)
                 {
                     hash = JsonConvert.DeserializeObject<IList<T>>(queryResult.Content);
                 }

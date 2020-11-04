@@ -44,12 +44,12 @@ namespace PS.Template.API.Controllers
             if (cuenta != null)
             {
 
-                return StatusCode(201, new ResponsePutOK()
+                return new JsonResult(new ResponsePutOK()
                 {
                     Id = cuenta.IdCuenta.ToString(),
                     Type = "Cuenta"
                 }
-                );
+                ) { StatusCode = 201 };
             }
             else
             {
@@ -60,7 +60,7 @@ namespace PS.Template.API.Controllers
                     Detail = "No se ha podido realizar el alta de la cuenta",
                     Instance = Url.Action("Put", "account", new { id = account.Mail }),
                 };
-                return StatusCode(501, details);
+                return new JsonResult(details) { StatusCode = 501 };
             }
         }
         private string GenerateToken(DatosCuentasDTO data)

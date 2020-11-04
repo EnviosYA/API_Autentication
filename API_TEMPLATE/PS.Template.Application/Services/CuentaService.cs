@@ -7,7 +7,6 @@ using PS.Template.Domain.Interfaces.Service;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace PS.Template.Application.Services
 {
@@ -21,6 +20,7 @@ namespace PS.Template.Application.Services
             _repository = repository;
             _request = generate;
         }
+
         public virtual DatosCuentasDTO FindDataAccount(UserInfo userInfo)
         {
             
@@ -37,6 +37,7 @@ namespace PS.Template.Application.Services
             
             return cuentaDTO;
         }
+
         public virtual Cuenta AltaCuenta(CuentaDTO account)
         {
             try
@@ -66,7 +67,6 @@ namespace PS.Template.Application.Services
             RestRequest request = new RestRequest(Method.GET);
             request.AddQueryParameter("id", usuario.ToString());
             IEnumerable<ResponseGetAllUsuarios> user= _request.ConsultarApiRest<ResponseGetAllUsuarios>(uri, request);
-
             return user;
         }
     }
