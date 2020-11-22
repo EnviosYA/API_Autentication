@@ -32,7 +32,7 @@ namespace PS.Template.API.Controllers
             DatosCuentasDTO cuentaDTO = _service.FindDataAccount(userInfo);
 
             if (cuentaDTO != null)
-                return Ok(GenerateToken(cuentaDTO));
+                return new JsonResult(Ok(GenerateToken(cuentaDTO))) { StatusCode = 200 };
             else
                 return Unauthorized();
         }
