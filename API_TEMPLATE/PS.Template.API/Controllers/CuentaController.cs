@@ -26,8 +26,8 @@ namespace PS.Template.API.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet]
-        public IActionResult Get([FromQuery] UserInfo userInfo)
+        [HttpPost("Login")]
+        public IActionResult Get(UserInfo userInfo)
         {
             DatosCuentasDTO cuentaDTO = _service.FindDataAccount(userInfo);
 
@@ -77,12 +77,18 @@ namespace PS.Template.API.Controllers
             {
                 new Claim("IdUser", data.IdUsuario.ToString()),
                 new Claim("Email", data.Mail),
-                new Claim("account type" , data.DescTipCuenta),
-                new Claim("State" , data.DescEstado),
+                new Claim("account type" , data.CodCuenta.ToString()),
+                new Claim("State" , data.CodEstado.ToString()),
                 new Claim("Name",data.NameUser),
                 new Claim("LastName",data.LastNameUser)
             };
-            var payload = new JwtPayload(claims);
+            var payload = new JwtPayload(
+                 issuer: "Encioya.com",
+                audience: "envioya.com",
+                claims: claims,
+                notBefore: DateTime.Now,
+                expires : DateTime.Now.AddHours(6)
+                );
 
             var token = new JwtSecurityToken(header, payload);
             return new JwtSecurityTokenHandler().WriteToken(token);

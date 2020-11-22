@@ -6,7 +6,7 @@ using PS.Template.Domain.Interfaces.RequestApis;
 using PS.Template.Domain.Interfaces.Service;
 using RestSharp;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace PS.Template.Application.Services
 {
@@ -23,20 +23,25 @@ namespace PS.Template.Application.Services
 
         public virtual DatosCuentasDTO FindDataAccount(UserInfo userInfo)
         {
-            IEnumerable<ResponseGetAllUsuarios> ALGO = GetDataApi(1);
+            int a = userInfo.Password.GetHashCode();
 
-            DatosCuentasDTO cuentaDTO =  _repository.FindDataAccount(userInfo);
+            Console.WriteLine(a);
+
+            DatosCuentasDTO cuentaDTO = _repository.FindDataAccount(userInfo);
 
             if (cuentaDTO != null)
             {
-                IEnumerable<ResponseGetAllUsuarios> user = GetDataApi(cuentaDTO.IdUsuario);
-                foreach (var item in user)
+                ResponseGetAllUsuarios user = GetDataApi(cuentaDTO.IdUsuario);
+                if(user != null)
                 {
-                    cuentaDTO.NameUser = item.Nombre;
-                    cuentaDTO.LastNameUser = item.Apellido;
+                    cuentaDTO.NameUser = user.Nombre;
+                    cuentaDTO.LastNameUser = user.Apellido;
+                }
+                else
+                {
+                    cuentaDTO = null;
                 }
             }
-            
             return cuentaDTO;
         }
 
@@ -63,12 +68,13 @@ namespace PS.Template.Application.Services
             }
         }
 
-        public IEnumerable<ResponseGetAllUsuarios> GetDataApi(int usuario)
+        public ResponseGetAllUsuarios GetDataApi(int usuario)
         {
-            string uri = _request.GetUri(3);
+            string uri = _request.GetUri(2);
             RestRequest request = new RestRequest(Method.GET);
             request.AddQueryParameter("id", usuario.ToString());
-            IEnumerable<ResponseGetAllUsuarios> user= _request.ConsultarApiRest<ResponseGetAllUsuarios>(uri, request);
+            ResponseGetAllUsuarios user = _request.ConsultarApiRest<ResponseGetAllUsuarios>(uri, request).First();
+
             return user;
         }
     }

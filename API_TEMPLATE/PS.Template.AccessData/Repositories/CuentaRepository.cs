@@ -28,8 +28,8 @@ namespace PS.Template.AccessData.Repositories
                                       {
                                           Mail = cuenta.Mail,
                                           IdUsuario = cuenta.IdUsuario,
-                                          DescEstado = estado.DescEstado,
-                                          DescTipCuenta = tipcuenta.DescTipCuenta
+                                          CodEstado = estado.IdEstado,
+                                          CodCuenta = tipcuenta.IdTipoCuenta
                                       };
 
             return account.FirstOrDefault();

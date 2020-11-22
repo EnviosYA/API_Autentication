@@ -65,7 +65,7 @@ namespace PS.Template.API
             // CONFIGURACION DEL JWSTOKEN
             services.AddJWTAuthentication(Configuration);
 
-            //
+            // Acceder al context en toda la solución
             services.AddHttpContextAccessor();
         }
 
