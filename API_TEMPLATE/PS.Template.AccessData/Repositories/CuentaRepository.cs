@@ -22,7 +22,7 @@ namespace PS.Template.AccessData.Repositories
             IQueryable<DatosCuentasDTO> account = from cuenta in _context.Cuenta
                                       join estado in _context.Estado on cuenta.IdEstado equals estado.IdEstado
                                       join tipcuenta in _context.TipoCuenta on cuenta.IdTipoCuenta equals tipcuenta.IdTipoCuenta
-                                      where cuenta.Mail == userInfo.Username
+                                      where cuenta.Mail == userInfo.Email
                                       where cuenta.Contraseña == userInfo.Password
                                       select new DatosCuentasDTO
                                       {
