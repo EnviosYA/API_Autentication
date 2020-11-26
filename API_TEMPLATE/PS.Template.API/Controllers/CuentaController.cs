@@ -32,37 +32,41 @@ namespace PS.Template.API.Controllers
             DatosCuentasDTO cuentaDTO = _service.FindDataAccount(userInfo);
 
             if (cuentaDTO != null)
-                return new JsonResult(Ok(GenerateToken(cuentaDTO))) { StatusCode = 200 };
+                return new JsonResult(Ok(GenerateToken(cuentaDTO)));
             else
-                return Unauthorized();
+                return new JsonResult(Unauthorized()) { StatusCode = 401 };
         }
 
         [HttpPost]
         public IActionResult Post(CuentaDTO account)
         {
-            var cuenta = _service.AltaCuenta(account);
-            if (cuenta != null)
-            {
+            int status = 400;
 
-                return new JsonResult(new ResponsePutOK()
-                {
-                    Id = cuenta.IdCuenta.ToString(),
-                    Type = "Cuenta"
-                }
-                ) { StatusCode = 201 };
-            }
-            else
+            if (!_service.ValidarCuenta(account.Mail))
             {
-                var details = new ProblemDetails()
+                status = 501;
+                var cuenta = _service.AltaCuenta(account);
+                if (cuenta != null)
                 {
-                    Type = "https://localhost:44311/index.html",
-                    Title = "Error al generar Cliente",
-                    Detail = "No se ha podido realizar el alta de la cuenta",
-                    Instance = Url.Action("Put", "account", new { id = account.Mail }),
-                };
-                return new JsonResult(details) { StatusCode = 501 };
+                    return new JsonResult(new ResponsePutOK()
+                    {
+                        Id = cuenta.IdCuenta.ToString(),
+                        Type = "Cuenta"
+                    })
+                    { StatusCode = 201 };
+                }
             }
+
+            var details = new ProblemDetails()
+            {
+                Type = "Cuenta",
+                Title = "Error al generar Cliente",
+                Detail = status == 400 ? "El usuario se encuentra registrado ":"No se ha podido realizar el alta de la cuenta",
+                Instance = Url.Action("Put", "account", new { id = account.Mail }),
+            };
+            return new JsonResult(details) { StatusCode = status };
         }
+
         private string GenerateToken(DatosCuentasDTO data)
         {
             var header = new JwtHeader(
@@ -77,7 +81,7 @@ namespace PS.Template.API.Controllers
             {
                 new Claim("IdUser", data.IdUsuario.ToString()),
                 new Claim("Email", data.Mail),
-                new Claim("account type" , data.CodCuenta.ToString()),
+                new Claim("accountType" , data.CodCuenta.ToString()),
                 new Claim("State" , data.CodEstado.ToString()),
                 new Claim("Name",data.NameUser),
                 new Claim("LastName",data.LastNameUser)
@@ -87,7 +91,7 @@ namespace PS.Template.API.Controllers
                 audience: "envioya.com",
                 claims: claims,
                 notBefore: DateTime.Now,
-                expires : DateTime.Now.AddHours(6)
+                expires: DateTime.Now.AddHours(6)
                 );
 
             var token = new JwtSecurityToken(header, payload);

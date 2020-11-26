@@ -34,5 +34,15 @@ namespace PS.Template.AccessData.Repositories
 
             return account.FirstOrDefault();
         }
+        
+        public bool FindMail(string mail)
+        {
+            IQueryable<string> account = from cuenta in _context.Cuenta
+                                         where cuenta.Mail == mail
+                                         select cuenta.Mail;
+            
+
+            return account.Any();
+        }
     }
 }

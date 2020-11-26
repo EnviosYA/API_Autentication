@@ -8,5 +8,6 @@ namespace PS.Template.Domain.Interfaces.Service
     {
         DatosCuentasDTO FindDataAccount(UserInfo userInfo);
         Cuenta AltaCuenta(CuentaDTO account);
+        bool ValidarCuenta(string mail);
     }
 }

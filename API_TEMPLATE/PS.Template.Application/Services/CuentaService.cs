@@ -7,6 +7,8 @@ using PS.Template.Domain.Interfaces.Service;
 using RestSharp;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace PS.Template.Application.Services
 {
@@ -23,16 +25,14 @@ namespace PS.Template.Application.Services
 
         public virtual DatosCuentasDTO FindDataAccount(UserInfo userInfo)
         {
-            int a = userInfo.Password.GetHashCode();
-
-            Console.WriteLine(a);
+            userInfo.Password = HashPassword(userInfo.Password);
 
             DatosCuentasDTO cuentaDTO = _repository.FindDataAccount(userInfo);
 
             if (cuentaDTO != null)
             {
                 ResponseGetAllUsuarios user = GetDataApi(cuentaDTO.IdUsuario);
-                if(user != null)
+                if (user != null)
                 {
                     cuentaDTO.NameUser = user.Nombre;
                     cuentaDTO.LastNameUser = user.Apellido;
@@ -49,10 +49,12 @@ namespace PS.Template.Application.Services
         {
             try
             {
+
+
                 Cuenta cuenta = new Cuenta()
                 {
                     Mail = account.Mail,
-                    Contraseña = account.Contraseña,
+                    Contraseña = HashPassword(account.Contraseña),
                     IdEstado = 1,
                     IdUsuario = account.IdUsuario,
                     IdTipoCuenta = account.IdTipoCuenta,
@@ -67,6 +69,11 @@ namespace PS.Template.Application.Services
                 return null;
             }
         }
+        public virtual bool ValidarCuenta(string mail)
+        {
+            return _repository.FindMail(mail);
+        }
+
 
         public ResponseGetAllUsuarios GetDataApi(int usuario)
         {
@@ -76,6 +83,20 @@ namespace PS.Template.Application.Services
             ResponseGetAllUsuarios user = _request.ConsultarApiRest<ResponseGetAllUsuarios>(uri, request).First();
 
             return user;
+        }
+
+        private string HashPassword(string keword)
+        {
+            string hash;
+
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] sourceBytes = Encoding.UTF8.GetBytes(keword);
+                byte[] hashBytes = sha256Hash.ComputeHash(sourceBytes);
+                hash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+            }
+
+            return hash;
         }
     }
 }
