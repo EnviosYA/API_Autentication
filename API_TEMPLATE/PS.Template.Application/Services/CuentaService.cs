@@ -49,8 +49,6 @@ namespace PS.Template.Application.Services
         {
             try
             {
-
-
                 Cuenta cuenta = new Cuenta()
                 {
                     Mail = account.Mail,
@@ -61,7 +59,6 @@ namespace PS.Template.Application.Services
                     FecAlta = DateTime.Now
                 };
                 _repository.Add(cuenta);
-
                 return cuenta;
             }
             catch
